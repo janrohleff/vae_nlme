@@ -34,6 +34,26 @@ pip install torch numpy cvxpy matplotlib scipy
 ```
 
 
-## Package Overview
-ghhf
-fghf
+## Repository Structure
+
+├── Data/
+│   └── neonates_data_lengths.pt    # Data for Case Study 2 (Neonate Weight Progression)
+│   └── neonates_data.pt            # Number of observations for every individual for Case Study 2
+│   └── theophylline_data.pt        # Data for Case Study 1 (Theophylline Pharmacokinetics)
+
+├── Examples/
+│   └── neonates.py                 # Main VAE training + results for Case Study 2
+│   └── theophylline.py             # Main VAE training + results for Case Study 1
+
+├── Plots/
+│   └── neonates_convergence_covariate.pdf                     # VAE Covariate-Convergence for Case Study 2
+│   └── neonates_convergence_popParam.pdf                      # VAE Population-Parameter-Convergence for Case Study 2
+│   └── theophylline_convergence_covariate.pdf                 # VAE Covariate-Convergence for Case Study 2
+│   └── theophylline_convergence_popParam.pdf                  # VAE Population-Parameter-Convergence for Case Study 2
+
+├── functions.py        # All important functions
+├── pop_parameter.py    # Updating Population Parameter during the Training
+├── vae.py              # Variational Autoencoder architecture 
+├── visualization.py    # Print + Vizualize the training results
+├── README.md       
+
