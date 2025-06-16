@@ -35,25 +35,26 @@ pip install torch numpy cvxpy matplotlib scipy
 
 
 ## Repository Structure
-
+.
 ├── Data/
-│   └── neonates_data_lengths.pt    # Data for Case Study 2 (Neonate Weight Progression)
-│   └── neonates_data.pt            # Number of observations for every individual for Case Study 2
-│   └── theophylline_data.pt        # Data for Case Study 1 (Theophylline Pharmacokinetics)
+│   ├── neonates_data_lengths.pt      # Number of observations per individual (Case Study 2)
+│   ├── neonates_data.pt              # Weight progression data for neonates (Case Study 2)
+│   └── theophylline_data.pt          # Pharmacokinetic data (Case Study 1)
 
 ├── Examples/
-│   └── neonates.py                 # Main VAE training + results for Case Study 2
-│   └── theophylline.py             # Main VAE training + results for Case Study 1
+│   ├── neonates.py                   # Main VAE training + evaluation for Case Study 2
+│   └── theophylline.py               # Main VAE training + evaluation for Case Study 1
 
 ├── Plots/
-│   └── neonates_convergence_covariate.pdf                     # VAE Covariate-Convergence for Case Study 2
-│   └── neonates_convergence_popParam.pdf                      # VAE Population-Parameter-Convergence for Case Study 2
-│   └── theophylline_convergence_covariate.pdf                 # VAE Covariate-Convergence for Case Study 2
-│   └── theophylline_convergence_popParam.pdf                  # VAE Population-Parameter-Convergence for Case Study 2
+│   ├── neonates_convergence_covariate.pdf        # Covariate convergence plots (Case Study 2)
+│   ├── neonates_convergence_popParam.pdf         # Population parameter convergence plots (Case Study 2)
+│   ├── theophylline_convergence_covariate.pdf    # Covariate convergence plots (Case Study 1)
+│   └── theophylline_convergence_popParam.pdf     # Population parameter convergence plots (Case Study 1)
 
-├── functions.py        # All important functions
-├── pop_parameter.py    # Updating Population Parameter during the Training
-├── vae.py              # Variational Autoencoder architecture 
-├── visualization.py    # Print + Vizualize the training results
-├── README.md       
+├── functions.py          # Core helper functions used across both case studies
+├── pop_parameter.py      # Code for updating population-level parameters during training
+├── vae.py                # Implementation of the Variational Autoencoder architecture
+├── visualization.py      # Tools for visualization and formatted result output
+└── README.md             # This file
+     
 
