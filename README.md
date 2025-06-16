@@ -22,7 +22,6 @@ The simulations reproduce the results presented in Case Study 1. Due to privacy 
 - One RUN is all you need
 -  Requires the following Python packages: `torch`, `numpy`, `cvxpy`, `matplotlib`, and `scipy`
 
----
 
 ### Installation
 
@@ -32,5 +31,8 @@ Clone the repository and install the dependencies:
 git clone https://github.com/your-username/vae-nlme.git
 cd vae-nlme
 pip install torch numpy cvxpy matplotlib scipy
+'''
 
-## Repository Structure
+### Installation
+ghhf
+fghf
