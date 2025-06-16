@@ -34,27 +34,24 @@ pip install torch numpy cvxpy matplotlib scipy
 ```
 
 
-## Repository Structure
-.
-├── Data/
-│   ├── neonates_data_lengths.pt      # Number of observations per individual (Case Study 2)
-│   ├── neonates_data.pt              # Weight progression data for neonates (Case Study 2)
-│   └── theophylline_data.pt          # Pharmacokinetic data (Case Study 1)
+- **`Data/`**
+  - `neonates_data_lengths.pt` – Number of observations per individual (Case Study 2)
+  - `neonates_data.pt` – Weight progression data for neonates (Case Study 2)
+  - `theophylline_data.pt` – Pharmacokinetic data (Case Study 1)
 
-├── Examples/
-│   ├── neonates.py                   # Main VAE training + evaluation for Case Study 2
-│   └── theophylline.py               # Main VAE training + evaluation for Case Study 1
+- **`Examples/`**
+  - `neonates.py` – Main VAE training + evaluation for Case Study 2  
+  - `theophylline.py` – Main VAE training + evaluation for Case Study 1
 
-├── Plots/
-│   ├── neonates_convergence_covariate.pdf        # Covariate convergence plots (Case Study 2)
-│   ├── neonates_convergence_popParam.pdf         # Population parameter convergence plots (Case Study 2)
-│   ├── theophylline_convergence_covariate.pdf    # Covariate convergence plots (Case Study 1)
-│   └── theophylline_convergence_popParam.pdf     # Population parameter convergence plots (Case Study 1)
+- **`Plots/`**
+  - `neonates_convergence_covariate.pdf` – Covariate convergence (Case Study 2)  
+  - `neonates_convergence_popParam.pdf` – Population parameter convergence (Case Study 2)  
+  - `theophylline_convergence_covariate.pdf` – Covariate convergence (Case Study 1)  
+  - `theophylline_convergence_popParam.pdf` – Population parameter convergence (Case Study 1)
 
-├── functions.py          # Core helper functions used across both case studies
-├── pop_parameter.py      # Code for updating population-level parameters during training
-├── vae.py                # Implementation of the Variational Autoencoder architecture
-├── visualization.py      # Tools for visualization and formatted result output
-└── README.md             # This file
-     
+- **`functions.py`** – Core helper functions  
+- **`pop_parameter.py`** – Population parameter updates during training  
+- **`vae.py`** – VAE architecture implementation  
+- **`visualization.py`** – Plotting and formatted output  
+- **`README.md`** – This file
 
