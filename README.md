@@ -28,8 +28,8 @@ The simulations reproduce the results presented in Case Study 1. Due to privacy 
 Clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/your-username/vae-nlme.git
-cd vae-nlme
+git clone https://github.com/janrohleff/vae_nlme.git
+cd vae_nlme
 pip install torch numpy cvxpy matplotlib scipy
 ```
 
