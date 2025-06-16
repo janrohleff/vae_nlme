@@ -31,8 +31,9 @@ Clone the repository and install the dependencies:
 git clone https://github.com/your-username/vae-nlme.git
 cd vae-nlme
 pip install torch numpy cvxpy matplotlib scipy
-'''
+```
 
-### Installation
+
+## Package Overview
 ghhf
 fghf
