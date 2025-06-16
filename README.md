@@ -33,6 +33,7 @@ cd vae-nlme
 pip install torch numpy cvxpy matplotlib scipy
 ```
 
+## Repository Structure
 
 - **`Data/`**
   - `neonates_data_lengths.pt` – Number of observations per individual (Case Study 2)
