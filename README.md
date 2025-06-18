@@ -21,7 +21,7 @@ The simulations reproduce the results presented in Case Study 1. Due to privacy 
 - Implementation of a Variational Autoencoder applied to nonlinear mixed-effects modeling
 - Simultaneous parameter estimation and covariate selection
 - One RUN is all you need
--  Requires the following Python packages: `torch`, `numpy`, `cvxpy`, `matplotlib`, and `scipy`
+-  Requires the following Python packages: `torch`, 'torchode', `numpy`, `cvxpy`, 'gurobipy', `matplotlib` and `scipy`
 
 
 ### Installation
