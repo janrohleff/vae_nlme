@@ -37,6 +37,8 @@ pip install torch torchode numpy cvxpy gurobipy matplotlib scipy
 ## Repository Structure
 
 - **`Data/`**
+  - `neonates_data.csv` – Weight progression data for neonates (Case Study 2)
+  - `neonates_data.pt` – Weight progression data for neonates (Case Study 2)
   - `neonates_data_lengths.pt` – Number of observations per individual (Case Study 2)
   - `neonates_data.pt` – Weight progression data for neonates (Case Study 2)
   - `theophylline_data.pt` – Pharmacokinetic data (Case Study 1)
