@@ -24,7 +24,7 @@ The simulations reproduce the results presented in Case Study 1. Due to privacy 
 -  Requires the following Python packages: `torch`, `torchode`, `numpy`, `cvxpy`, `gurobipy`, `matplotlib` and `scipy`
 
 
-### Installation
+## Installation
 
 Clone the repository and install the dependencies:
 
@@ -34,7 +34,7 @@ cd vae_nlme
 pip install torch torchode numpy cvxpy gurobipy matplotlib scipy
 ```
 
-### Run
+## Run
 To run the examples, execute one of the following scripts:
 
 **Case study 1 – Theophylline data:**
