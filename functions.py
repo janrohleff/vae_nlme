@@ -18,6 +18,7 @@ def kldiv_normal_normal(mean1:torch.Tensor, var1:torch.Tensor, mean2:torch.Tenso
     where diag(exp(lnvar1)) is a full covariance matrix and diag(exp(lnvar2)) is a diagonal covariance matrix.
     """
     k = mean1.shape[0]
+    
     return 0.5 * (torch.trace(1/var2*var1) - k + torch.sum((mean2-mean1).pow(2)/var2) + torch.log(var2).sum()- 2*log_diag.sum())
    
 def p_x_z_compute(data, x_mean, res, lengths):
