@@ -40,22 +40,31 @@ pip install torch torchode numpy cvxpy gurobipy matplotlib scipy
   - `neonates_data.csv` – Weight progression data for neonates (Case Study 2)
   - `neonates_data.pt` – Weight progression data for neonates (Case Study 2)
   - `neonates_data_lengths.pt` – Number of observations per individual (Case Study 2)
-  - `neonates_data.pt` – Weight progression data for neonates (Case Study 2)
   - `theophylline_data.pt` – Pharmacokinetic data (Case Study 1)
+  - `theophylline_data.tab` – Pharmacokinetic data (Case Study 1)
 
-- **`Examples/`**
+- **`Main/`**
   - `neonates.py` – Main VAE training + evaluation for Case Study 2  
   - `theophylline.py` – Main VAE training + evaluation for Case Study 1
+ 
+- **`ParaUpdate/`**
+  - `pop_parameter.c` – Population parameter updates during training phase
+  - `pop_parameter.cpython-313-darwin.so` – compiled for macOS (Python 3.13)
 
 - **`Plots/`**
   - `neonates_convergence_covariate.pdf` – Covariate convergence (Case Study 2)  
   - `neonates_convergence_popParam.pdf` – Population parameter convergence (Case Study 2)  
   - `theophylline_convergence_covariate.pdf` – Covariate convergence (Case Study 1)  
   - `theophylline_convergence_popParam.pdf` – Population parameter convergence (Case Study 1)
+    
+- **`VAE/`**
+  - `decoder.py` – VAE Decoder
+  - `encoder.c` – VAE Encoder 
+  - `encoder.cpython-313-darwin.so` –  compiled for macOS (Python 3.13) 
 
-- **`functions.py`** – Core helper functions  
-- **`pop_parameter.py`** – Population parameter updates during training  
-- **`vae.py`** – VAE architecture implementation  
-- **`visualization.py`** – Plotting and formatted output  
 - **`README.md`** – This file
+- **`functions.py`** – Core helper functions
+- **`functions_neonates.py`** – initialization functions for neonates
+- **`functions_theo.py`** – initialization functions for theophylline 
+- **`visualization.py`** – generates plots and formatted summaries
 
