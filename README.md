@@ -63,6 +63,7 @@ python Main/neonates.py
 - **`ParaUpdate/`**
   - `pop_parameter.c` – Population parameter updates during training phase
   - `pop_parameter.cpython-313-darwin.so` – compiled for macOS (Python 3.13)
+  - `pop_parameter.cpython-36m-x86_64-linux-gnu.so` – compiled for Linux (Python 3.13)
 
 - **`Plots/`**
   - `neonates_convergence_covariate.pdf` – Covariate convergence (Case Study 2)  
@@ -73,7 +74,8 @@ python Main/neonates.py
 - **`VAE/`**
   - `decoder.py` – VAE Decoder
   - `encoder.c` – VAE Encoder 
-  - `encoder.cpython-313-darwin.so` –  compiled for macOS (Python 3.13) 
+  - `encoder.cpython-313-darwin.so` –  compiled for macOS (Python 3.13)
+  - `encoder.cpython-36m-x86_64-linux-gnu.so` – compiled for Linux (Python 3.13)
 
 - **`README.md`** – This file
 - **`functions.py`** – Core helper functions
