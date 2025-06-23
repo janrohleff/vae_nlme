@@ -34,6 +34,19 @@ cd vae_nlme
 pip install torch torchode numpy cvxpy gurobipy matplotlib scipy
 ```
 
+### Run
+To run the examples, execute one of the following scripts:
+
+**Case study 1 – Theophylline data:**
+```bash
+python Main/theophylline.py
+```
+
+**Case study 2 – Neonates data:**
+```bash
+python Main/neonates.py
+```
+
 ## Repository Structure
 
 - **`Data/`**
