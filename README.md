@@ -42,7 +42,7 @@ To run the examples, execute one of the following scripts:
 python Main/theophylline.py
 ```
 
-**Case study 2 – Neonates data:**
+**Case study 2 – Neonate data:**
 ```bash
 python Main/neonates.py
 ```
@@ -51,8 +51,8 @@ Convergence results were stored in `Plots/`.
 ## Repository Structure
 
 - **`Data/`**
-  - `neonates_data.csv` – Weight progression data for neonates (Case Study 2)
-  - `neonates_data.pt` – Weight progression data for neonates (Case Study 2)
+  - `neonates_data.csv` – Weight progression data for neonate (Case Study 2)
+  - `neonates_data.pt` – Weight progression data for neonate (Case Study 2)
   - `neonates_data_lengths.pt` – Number of observations per individual (Case Study 2)
   - `theophylline_data.pt` – Pharmacokinetic data (Case Study 1)
   - `theophylline_data.tab` – Pharmacokinetic data (Case Study 1)
@@ -80,7 +80,7 @@ Convergence results were stored in `Plots/`.
 
 - **`README.md`** – This file
 - **`functions.py`** – Core helper functions
-- **`functions_neonates.py`** – initialization functions for neonates
+- **`functions_neonates.py`** – initialization functions for neonate
 - **`functions_theo.py`** – initialization functions for theophylline 
 - **`visualization.py`** – generates plots and formatted summaries
 
