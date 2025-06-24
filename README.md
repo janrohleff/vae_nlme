@@ -46,6 +46,7 @@ python Main/theophylline.py
 ```bash
 python Main/neonates.py
 ```
+Convergence results were stored in `Plots/`.
 
 ## Repository Structure
 
