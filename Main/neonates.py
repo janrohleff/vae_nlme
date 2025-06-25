@@ -168,7 +168,6 @@ for iter in range(1,iters + 1):
         elbo.backward()
         optimizer.step()
         optimizer.zero_grad()
-    print(a)
     #########################################################
     # Print
     #########################################################
