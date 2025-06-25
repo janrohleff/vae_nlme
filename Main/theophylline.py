@@ -22,7 +22,7 @@ from visualization import *
 import torch
 
 # Pick a manual seed for randomization
-torch.manual_seed(2)
+torch.manual_seed(3)
 
 #########################################################
 # Load Data
