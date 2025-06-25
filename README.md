@@ -63,6 +63,7 @@ Convergence results were stored in `Plots/`.
  
 - **`ParaUpdate/`**
   - `pop_parameter.c` – Population parameter updates during training phase
+  - `pop_parameter.cp313-win_amd64.pyd` - compiled for Windows (Python 3.13)
   - `pop_parameter.cpython-313-darwin.so` – compiled for macOS (Python 3.13)
   - `pop_parameter.cpython-36m-x86_64-linux-gnu.so` – compiled for Linux (Python 3.13)
 
@@ -74,7 +75,8 @@ Convergence results were stored in `Plots/`.
     
 - **`VAE/`**
   - `decoder.py` – VAE Decoder
-  - `encoder.c` – VAE Encoder 
+  - `encoder.c` – VAE Encoder
+  - `encoder.cp313-win_amd64.pyd` - compiled for Windows (Python 3.13)
   - `encoder.cpython-313-darwin.so` –  compiled for macOS (Python 3.13)
   - `encoder.cpython-36m-x86_64-linux-gnu.so` – compiled for Linux (Python 3.13)
 
