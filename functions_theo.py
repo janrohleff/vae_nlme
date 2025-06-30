@@ -33,6 +33,34 @@ def load_data(path):
 
     return data, data_in, lengths, dose, weight_pop, covariates, covariates_in
 
+def load_data_multiple(path):
+    #########################################################
+    # Load Data
+    #########################################################
+    data = torch.load(path) # load data
+    lengths = (data.shape[1]*torch.ones(data.shape[0])).int()
+    time = data[:, :, 0]
+    dose = data[:, :, 2]
+    mask = dose != 0
+    time_dose_times = time[mask].reshape(data.shape[0], -1)
+    dose_values     = dose[mask].reshape(data.shape[0], -1)
+    dose = torch.stack((time_dose_times, dose_values), dim=2)
+    weight_pop = data[:,0,3].mean()
+    covariates = data[:,0,3:]
+
+    #########################################################
+    # Standardize input data
+    #########################################################
+    data_in = data[:,:,:2].clone()
+    data_mean = data[:,:,1].mean()
+    data_std = data[:,:,1].std()
+    data_in[:,:,0] =  data_in[:,:,0]/data_in[:,:,0].max() 
+    data_in[:,:,1] = (data_in[:,:,1] - data_mean)/(data_std)
+    covariates_in = data[:,0,3:].clone()
+    covariates_in[:,0] = (covariates_in[:,0] - covariates_in[:,0].mean())/covariates_in[:,0].std()
+
+    return data, data_in, lengths, dose, weight_pop, covariates, covariates_in
+
 def initalize_C(nbatch, z_dim, n_cov, covariates, weight_pop):
     C = torch.zeros(nbatch, z_dim, z_dim + z_dim*n_cov)
 
