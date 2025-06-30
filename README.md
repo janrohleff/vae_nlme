@@ -82,6 +82,10 @@ Convergence results were stored in `Plots/`.
   - `neonates_convergence_data.pdf` – Data of Case Study 2
   - `theophylline_convergence_covariate.pdf` – Covariate convergence (Case Study 1)  
   - `theophylline_convergence_popParam.pdf` – Population parameter convergence (Case Study 1)
+  - `theophylline_data.pdf` – Data of Case Study 1
+  - `theophylline_multiple_convergence_covariate.pdf` – Covariate convergence (Case Study 1) (multiple dosing) 
+  - `theophylline_multiple_convergence_popParam.pdf` – Population parameter convergence (Case Study 1) (multiple dosing) 
+  - `theophylline_multiple_data.pdf` – Data of Case Study 1 (multiple dosing) 
     
 - **`VAE/`**
   - `decoder.py` – VAE Decoder
