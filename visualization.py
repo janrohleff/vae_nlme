@@ -123,7 +123,7 @@ def plotConvergence_pop_theo(elbo_iter, a_iter, z_pop_iter, omega_pop_iter, iter
     axs[2, 2].legend([l1, l2, l3],['Burn in',r'$K_\alpha$',r'$K_\beta$'], loc='best', fontsize = 'x-large')
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('Plots/theophylline_convergence_popParam.pdf', dpi=500)
+    plt.savefig('VAE_nlme/Plots/theophylline_convergence_popParam.pdf', dpi=500)
     plt.show()
 
 def plotConvergence_covariate_theo(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in): 
@@ -137,12 +137,12 @@ def plotConvergence_covariate_theo(z_pop_iter, iters, kl_iter, gamma_iter, iters
     xticks = [0, kl_iter, gamma_iter, iters]
     xtick_labels = ['0', str(kl_iter), str(gamma_iter), str(iters)]
     plot_data = [
-    (z_pop_iter[iters_burn_in:, 3], r'$\beta_{k_a}^{sex}$'),
-    (z_pop_iter[iters_burn_in:, 5], r'$\beta_{k_e}^{sex}$'),
-    (z_pop_iter[iters_burn_in:, 7], r'$\beta_{V}^{sex}$'),
-    (z_pop_iter[iters_burn_in:, 4], r'$\beta_{k_a}^{w}$'),
-    (z_pop_iter[iters_burn_in:, 6], r'$\beta_{k_e}^{w}$'),
-    (z_pop_iter[iters_burn_in:, 8], r'$\beta_{V}^{w}$')
+    (z_pop_iter[iters_burn_in:, 3], r'$\beta_{k_a}^{w}$'),
+    (z_pop_iter[iters_burn_in:, 5], r'$\beta_{k_e}^{w}$'),
+    (z_pop_iter[iters_burn_in:, 7], r'$\beta_{V}^{w}$'),
+    (z_pop_iter[iters_burn_in:, 4], r'$\beta_{k_a}^{sex}$'),
+    (z_pop_iter[iters_burn_in:, 6], r'$\beta_{k_e}^{sex}$'),
+    (z_pop_iter[iters_burn_in:, 8], r'$\beta_{V}^{sex}$')
     ]
 
     for i, (data, title) in enumerate(plot_data):
@@ -176,7 +176,118 @@ def plotConvergence_covariate_theo(z_pop_iter, iters, kl_iter, gamma_iter, iters
     plt.tight_layout()
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('Plots/theophylline_convergence_covariate.pdf', dpi=1000)
+    plt.savefig('VAE_nlme/Plots/theophylline_convergence_covariate.pdf', dpi=1000)
+    plt.show()
+
+def plotConvergence_pop_theo_multiple(elbo_iter, a_iter, z_pop_iter, omega_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in): 
+    elbo_iter = elbo_iter.detach().numpy()
+    elbo_iter = np.hstack([np.nan*np.zeros(100), elbo_iter])
+    a_iter = a_iter.detach().numpy()
+    z_pop_iter = z_pop_iter.detach().numpy()
+    omega_pop_iter = omega_pop_iter.detach().numpy()
+
+    fig, axs = plt.subplots(3, 3, sharex=False, sharey=False)
+    fig.set_size_inches(10, 6)
+    xmax = iters
+    burn_in = iters_burn_in
+    k_alpha = kl_iter + iters_burn_in
+    k_beta = gamma_iter + iters_burn_in
+    xticks = [iters_burn_in, kl_iter + iters_burn_in, gamma_iter+ iters_burn_in, iters+ iters_burn_in]
+    xtick_labels = ['0', str(kl_iter), str(gamma_iter), str(iters)]
+    plot_data = [
+    (z_pop_iter[:, 0], r'$k_{a,pop}$'),
+    (z_pop_iter[:, 1], r'$k_{e,pop}$'),
+    (z_pop_iter[:, 2], r'$V_{pop}$'),
+    (omega_pop_iter[:, 0], r'$\omega_{k_a}$'),
+    (omega_pop_iter[:, 1], r'$\omega_{k_e}$'),
+    (omega_pop_iter[:, 2], r'$\omega_{V}$'),
+    (a_iter, r'$a$'),
+    (elbo_iter, r'$-\mathcal{L}_\psi(x)$')
+    ]
+
+    for i, (data, title) in enumerate(plot_data):
+        row, col = divmod(i, 3)
+        ax = axs[row, col]
+
+        if data is not None:
+            ax.plot(data)
+            ax.set_title(title, size = 14)
+            ax.set_xlim(0, xmax)
+
+            l1 = ax.axvspan(0, burn_in, facecolor=(0.83, 0.83, 0.83, 0.5), alpha=0.4)
+            l2 = ax.axvline(x=k_alpha, linestyle='dashed', color='green')
+            l3 = ax.axvline(x=k_beta, linestyle='dashed', color='red')
+
+            ax.set_xticks(xticks)
+            ax.set_xticklabels([])
+
+            ymin, ymax = ax.get_ylim()
+            offset_text = (ymax - ymin) / 16
+            offset_label = (ymax - ymin) / 5
+            for x, label in zip(xticks, xtick_labels):
+                ax.text(x, ymin - offset_text, label, ha='center', va='top')
+            ax.text(210, ymin - 1.2 * offset_label, 'Iterations', ha='center', va='top', fontsize=11)
+
+
+    plt.tight_layout()
+    axs[2,2].axis('off')
+    axs[2, 2].legend([l1, l2, l3],['Burn in',r'$K_\alpha$',r'$K_\beta$'], loc='best', fontsize = 'x-large')
+
+    plt.subplots_adjust(hspace = 1)
+    plt.savefig('VAE_nlme/Plots/theophylline_multiple_convergence_popParam.pdf', dpi=500)
+    plt.show()
+
+def plotConvergence_covariate_theo_multiple(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in): 
+    z_pop_iter = z_pop_iter.detach().numpy()
+
+    fig, axs = plt.subplots(2, 3, sharex=False, sharey=False)
+    fig.set_size_inches(10, 4)
+    xmax = iters
+    k_alpha = kl_iter 
+    k_beta = gamma_iter 
+    xticks = [0, kl_iter, gamma_iter, iters]
+    xtick_labels = ['0', str(kl_iter), str(gamma_iter), str(iters)]
+    plot_data = [
+    (z_pop_iter[iters_burn_in:, 3], r'$\beta_{k_a}^{w}$'),
+    (z_pop_iter[iters_burn_in:, 5], r'$\beta_{k_e}^{w}$'),
+    (z_pop_iter[iters_burn_in:, 7], r'$\beta_{V}^{w}$'),
+    (z_pop_iter[iters_burn_in:, 4], r'$\beta_{k_a}^{sex}$'),
+    (z_pop_iter[iters_burn_in:, 6], r'$\beta_{k_e}^{sex}$'),
+    (z_pop_iter[iters_burn_in:, 8], r'$\beta_{V}^{sex}$')
+    ]
+
+    for i, (data, title) in enumerate(plot_data):
+        row, col = divmod(i, 3)
+        ax = axs[row, col]
+
+        if data is not None:
+            ax.plot(data)
+            ax.set_title(title, size = 14)
+            ax.set_xlim(0, xmax)
+            if data[-1] == 0:
+                ymin, ymax = ax.get_ylim()
+                ax.axhspan(ymin, ymax, facecolor=(0.83, 0.83, 0.83), alpha=0.4, zorder=0)
+                ax.set_ylim(ymin, ymax)
+
+            # vertikale Linien überall
+            ax.axvline(x=k_alpha, linestyle='dashed', color='green')
+            ax.axvline(x=k_beta, linestyle='dashed', color='red')
+
+            ax.set_xticks(xticks)
+            ax.set_xticklabels([])
+
+            ymin, ymax = ax.get_ylim()
+            offset_text = (ymax - ymin) / 16
+            offset_label = (ymax - ymin) / 5
+            for x, label in zip(xticks, xtick_labels):
+                ax.text(x, ymin - offset_text, label, ha='center', va='top')
+            ax.text(160, ymin - 1.2 * offset_label, 'Iterations', ha='center', va='top', fontsize=11)
+
+
+    plt.tight_layout()
+
+    plt.subplots_adjust(hspace = 1)
+    plt.savefig('VAE_nlme/Plots/theophylline_multiple_convergence_covariate.pdf', dpi=1000)
     plt.show()
 
 def printOutput_neonates(z_pop, omega_pop, a, b, z_dim, nbatch, n_tot, h, names, LL_lin_mu, LL_is):
@@ -299,7 +410,7 @@ def plotConvergence_pop_neonates(elbo_iter, a_iter, z_pop_iter, omega_pop_iter, 
     axs[2, 3].legend([l1, l2, l3],['Burn in',r'$K_\alpha$',r'$K_\beta$'], loc='best', fontsize = '12')
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('Plots/neonates_convergence_popParam.pdf', dpi=500)
+    plt.savefig('VAE_nlme/Plots/neonates_convergence_popParam.pdf', dpi=500)
     plt.show()
 
 def plotConvergence_covariate_neonates(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in): 
@@ -372,5 +483,5 @@ def plotConvergence_covariate_neonates(z_pop_iter, iters, kl_iter, gamma_iter, i
     plt.tight_layout()
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('neonates_convergence_covariate.pdf', dpi=1000)
+    plt.savefig('VAE_nlme/Plots/neonates_convergence_covariate.pdf', dpi=1000)
     plt.show()
