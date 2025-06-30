@@ -14,7 +14,7 @@ The entire code was written by Jan Rohleff.
 
 ## Overview
 
-The simulations reproduce the results presented in Case Study 1. Due to privacy restrictions, we are not permitted to share the real data from Case Study 2. Instead, we provide simulated data that illustrates the behavior of the VAE in this second case.
+The simulations reproduce the results presented in Case Study 1 with a single dose and multiple dosing. Due to privacy restrictions, we are not permitted to share the real data from Case Study 2. Instead, we provide simulated data that illustrates the behavior of the VAE in this second case.
 
 ### Key Features
 
