@@ -123,7 +123,7 @@ def plotConvergence_pop_theo(elbo_iter, a_iter, z_pop_iter, omega_pop_iter, iter
     axs[2, 2].legend([l1, l2, l3],['Burn in',r'$K_\alpha$',r'$K_\beta$'], loc='best', fontsize = 'x-large')
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('VAE_nlme/Plots/theophylline_convergence_popParam.pdf', dpi=500)
+    plt.savefig('Plots/theophylline_convergence_popParam.pdf', dpi=500)
     plt.show()
 
 def plotConvergence_covariate_theo(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in): 
@@ -176,7 +176,7 @@ def plotConvergence_covariate_theo(z_pop_iter, iters, kl_iter, gamma_iter, iters
     plt.tight_layout()
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('VAE_nlme/Plots/theophylline_convergence_covariate.pdf', dpi=1000)
+    plt.savefig('Plots/theophylline_convergence_covariate.pdf', dpi=1000)
     plt.show()
 
 def plotConvergence_pop_theo_multiple(elbo_iter, a_iter, z_pop_iter, omega_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in): 
@@ -234,7 +234,7 @@ def plotConvergence_pop_theo_multiple(elbo_iter, a_iter, z_pop_iter, omega_pop_i
     axs[2, 2].legend([l1, l2, l3],['Burn in',r'$K_\alpha$',r'$K_\beta$'], loc='best', fontsize = 'x-large')
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('VAE_nlme/Plots/theophylline_multiple_convergence_popParam.pdf', dpi=500)
+    plt.savefig('Plots/theophylline_multiple_convergence_popParam.pdf', dpi=500)
     plt.show()
 
 def plotConvergence_covariate_theo_multiple(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in): 
@@ -287,7 +287,7 @@ def plotConvergence_covariate_theo_multiple(z_pop_iter, iters, kl_iter, gamma_it
     plt.tight_layout()
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('VAE_nlme/Plots/theophylline_multiple_convergence_covariate.pdf', dpi=1000)
+    plt.savefig('Plots/theophylline_multiple_convergence_covariate.pdf', dpi=1000)
     plt.show()
 
 def printOutput_neonates(z_pop, omega_pop, a, b, z_dim, nbatch, n_tot, h, names, LL_lin_mu, LL_is):
@@ -410,7 +410,7 @@ def plotConvergence_pop_neonates(elbo_iter, a_iter, z_pop_iter, omega_pop_iter, 
     axs[2, 3].legend([l1, l2, l3],['Burn in',r'$K_\alpha$',r'$K_\beta$'], loc='best', fontsize = '12')
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('VAE_nlme/Plots/neonates_convergence_popParam.pdf', dpi=500)
+    plt.savefig('Plots/neonates_convergence_popParam.pdf', dpi=500)
     plt.show()
 
 def plotConvergence_covariate_neonates(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in): 
@@ -483,5 +483,5 @@ def plotConvergence_covariate_neonates(z_pop_iter, iters, kl_iter, gamma_iter, i
     plt.tight_layout()
 
     plt.subplots_adjust(hspace = 1)
-    plt.savefig('VAE_nlme/Plots/neonates_convergence_covariate.pdf', dpi=1000)
+    plt.savefig('Plots/neonates_convergence_covariate.pdf', dpi=1000)
     plt.show()
