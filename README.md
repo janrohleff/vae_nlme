@@ -42,11 +42,17 @@ To run the examples, execute one of the following scripts:
 python Main/theophylline.py
 ```
 
+**Case study 1 – Theophylline data with multiple dosing:**
+```bash
+python Main/theophylline_multiple.py
+```
+
 **Case study 2 – Neonate data:**
 ```bash
 python Main/neonates.py
 ```
 Convergence results were stored in `Plots/`.
+
 
 ## Repository Structure
 
@@ -56,9 +62,12 @@ Convergence results were stored in `Plots/`.
   - `neonates_data_lengths.pt` – Number of observations per individual (Case Study 2)
   - `theophylline_data.pt` – Pharmacokinetic data (Case Study 1)
   - `theophylline_data.tab` – Pharmacokinetic data (Case Study 1)
+  - `theophylline_multiple_data.pt` – Pharmacokinetic data with multiple dosing (Case Study 1)
+  - `theophylline_multiple_data.tab` – Pharmacokinetic data with multiple dosing (Case Study 1)
 
 - **`Main/`**
-  - `neonates.py` – Main VAE training + evaluation for Case Study 2  
+  - `neonates.py` – Main VAE training + evaluation for Case Study 2
+  - `theophylline_multiple.py` – Main VAE training + evaluation for Case Study 1 (multiple dosing)
   - `theophylline.py` – Main VAE training + evaluation for Case Study 1
  
 - **`ParaUpdate/`**
@@ -69,7 +78,8 @@ Convergence results were stored in `Plots/`.
 
 - **`Plots/`**
   - `neonates_convergence_covariate.pdf` – Covariate convergence (Case Study 2)  
-  - `neonates_convergence_popParam.pdf` – Population parameter convergence (Case Study 2)  
+  - `neonates_convergence_popParam.pdf` – Population parameter convergence (Case Study 2)
+  - `neonates_convergence_data.pdf` – Data of Case Study 2
   - `theophylline_convergence_covariate.pdf` – Covariate convergence (Case Study 1)  
   - `theophylline_convergence_popParam.pdf` – Population parameter convergence (Case Study 1)
     
