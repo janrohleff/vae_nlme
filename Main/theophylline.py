@@ -3,7 +3,8 @@ Created on 16.07.2025
 
 @author: Jan Rohleff
 
-Parameter estimation + Covariate selection of a nonlinear mixed effects model using a variational autoencoder (VAE) for theophylline data (Case Study 1).
+Parameter estimation + Covariate selection of a nonlinear mixed effects model using a variational autoencoder (VAE) 
+for theophylline data (Case Study 1) with multiple dosing.
 """
 #########################################################
 # Import
