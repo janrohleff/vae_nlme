@@ -27,13 +27,15 @@ def Decoder_theophylline(z_normal, time, h, dose):
 def Decoder_theophylline_multiple(z_normal, time, h, dose):
     nbatch = dose.shape[0]
     z = h(z_normal)
+
     def sol(t):
-        f = torch.zeros(nbatch)
-        for dose_idx in range(dose.shape[1]):
-            if torch.all(t >= dose[:, dose_idx, 0]):
-                f += dose[:, dose_idx, 1] * z[:, 0] / (z[:, 2] * (z[:, 0] - z[:, 1])) * (torch.exp(-z[:, 1] * (t - dose[:, dose_idx, 0])) - torch.exp(-z[:, 0] * (t - dose[:, dose_idx, 0])))
-            else:
-                break
+        t_dose = dose[:, :, 0]  
+        AMT = dose[:, :, 1]  
+        mask = t.unsqueeze(1) >= t_dose
+        delta_t = (t.unsqueeze(1) - t_dose) * mask
+        expo = torch.exp(-z[:, 1:2] * delta_t) - torch.exp(-z[:, 0:1] * delta_t)
+        terms = AMT * z[:, 0:1] / (z[:, 2:3] * (z[:, 0:1] - z[:, 1:2]))  * expo * mask  
+        f = terms.sum(dim=1)  
         return f
 
     pred_x = torch.zeros(nbatch, time.shape[1], 1)
