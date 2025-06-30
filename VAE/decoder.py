@@ -24,6 +24,24 @@ def Decoder_theophylline(z_normal, time, h, dose):
 
     return pred_x
 
+def Decoder_theophylline_multiple(z_normal, time, h, dose):
+    nbatch = dose.shape[0]
+    z = h(z_normal)
+    def sol(t):
+        f = torch.zeros(nbatch)
+        for dose_idx in range(dose.shape[1]):
+            if torch.all(t >= dose[:, dose_idx, 0]):
+                f += dose[:, dose_idx, 1] * z[:, 0] / (z[:, 2] * (z[:, 0] - z[:, 1])) * (torch.exp(-z[:, 1] * (t - dose[:, dose_idx, 0])) - torch.exp(-z[:, 0] * (t - dose[:, dose_idx, 0])))
+            else:
+                break
+        return f
+
+    pred_x = torch.zeros(nbatch, time.shape[1], 1)
+    for t in range(time.shape[1]):
+        pred_x[:,t,0] = sol(time[:,t])
+
+    return pred_x
+
 def Decoder_neonates(z_normal, time, h, ODE_settings, args = None):
     nbatch = time.shape[0]
     z = h(z_normal)
