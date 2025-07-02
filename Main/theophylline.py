@@ -186,9 +186,3 @@ a_iter = torch.hstack((a_iter_bi, a_iter))
 printOutput_theo(z_pop, omega_pop, a, b, z_dim, nbatch, lengths.sum(), h, names_co, LL_lin_mu, LL_is)
 plotConvergence_pop_theo(Elbo_iter, a_iter, z_pop_iter, omega_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in)
 plotConvergence_covariate_theo(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in)
-
-torch.save(z_pop_iter, 'cpt_paper/theo/Plots/z_pop_iter.pt')
-torch.save(omega_pop_iter, 'cpt_paper/theo/Plots/omega_pop_iter.pt')
-torch.save(a_iter, 'cpt_paper/theo/Plots/a_iter.pt')
-torch.save(Elbo_iter, 'cpt_paper/theo/Plots/Elbo_iter.pt')
-
