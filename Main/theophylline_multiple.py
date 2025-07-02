@@ -3,8 +3,7 @@ Created on 16.07.2025
 
 @author: Jan Rohleff
 
-Parameter estimation + Covariate selection of a nonlinear mixed effects model using a variational autoencoder (VAE) 
-for theophylline data (Case Study 1) with multiple dosing.
+Parameter estimation + Covariate selection of a nonlinear mixed effects model using a variational autoencoder (VAE) for theophylline data (Case Study ).
 """
 #########################################################
 # Import
@@ -40,23 +39,14 @@ n_cov  = covariates.shape[1] # Number of covariates
 #########################################################
 # Prior distribution
 #########################################################
-def h(x):
-    if x.dim() == 1:
-        return torch.vstack([x[0].exp(), x[1].exp(), x[2]]).view(z_dim)
-    else:
-        return torch.vstack([x[:,0].exp(), x[:,1].exp(), x[:,2]]).T
-    
-def h_inverse(x):
-    if x.dim() == 1:
-        return torch.vstack([x[0].log(), x[1].log(), x[2]]).view(z_dim)
-    else:
-        return torch.vstack([x[:,0].log(), x[:,1].log(), x[:,2]]).T
+h = lambda x: x.exp()
+h_inverse = lambda x: x.log()
 #########################################################
 # Initialization LSTM Encoder
 #########################################################
-h_dim   = 25                                    # Hidden dimension of the LSTM
-sigma0  = torch.tensor([1e-2, 5e-3, 0.5])       # Initial standard deviation of the posterior distribution      
-mu0     = torch.tensor([1, 0.5, 15])            # Initial mean of the posterior distribution
+h_dim   = 25                                     # Hidden dimension of the LSTM
+sigma0  = torch.tensor([1e-2, 5e-3, 1e-1]).log() # Initial standard deviation of the posterior distribution      
+mu0     = torch.tensor([1, 0.5, 15])             # Initial mean of the posterior distribution
 Encoder = LSTM_Encoder(x_dim, h_dim, z_dim, nbatch, n_cov, mu0, sigma0, h_inverse)
 #Encoder = torch.compile(Encoder)
 #########################################################
@@ -93,7 +83,7 @@ pred_x_mean = pred_x.detach()
 #########################################################
 # Setup Optimizer
 #########################################################
-optimizer.param_groups[0]['lr'] = 1e-3 # Learning rate
+optimizer.param_groups[0]['lr'] = 2e-3 # Learning rate
 #########################################################
 # Initialize tensors to store results
 #########################################################
@@ -163,7 +153,7 @@ for iter in range(1,iters + 1):
     #########################################################
     # Save Iteration results
     #########################################################
-    z_pop_iter[iter-1] = torch.hstack((h(z_pop), z_pop[z_dim:]))
+    z_pop_iter[iter-1] = torch.hstack((h(z_pop[:z_dim]), z_pop[z_dim:]))
     omega_pop_iter[iter-1] = omega_pop.sqrt()
     a_iter[iter-1] = a
     Elbo_iter[iter-1] = ELBO.mean()

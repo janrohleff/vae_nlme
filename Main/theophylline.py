@@ -3,8 +3,7 @@ Created on 16.07.2025
 
 @author: Jan Rohleff
 
-Parameter estimation + Covariate selection of a nonlinear mixed effects model using a variational autoencoder (VAE) 
-for theophylline data (Case Study 1) with multiple dosing.
+Parameter estimation + Covariate selection of a nonlinear mixed effects model using a variational autoencoder (VAE) for theophylline data (Case Study ).
 """
 #########################################################
 # Import
@@ -23,12 +22,12 @@ from visualization import *
 import torch
 
 # Pick a manual seed for randomization
-torch.manual_seed(3)
+torch.manual_seed(1)
 
 #########################################################
 # Load Data
 #########################################################
-path = 'Data/'
+path = 'VAE_nlme/Data/'
 data, data_in, lengths, dose, weight_pop, covariates, covariates_in = load_data(path + 'theophylline_data.pt')
 #########################################################
 # Dimensions
@@ -40,23 +39,14 @@ n_cov  = covariates.shape[1] # Number of covariates
 #########################################################
 # Prior distribution
 #########################################################
-def h(x):
-    if x.dim() == 1:
-        return torch.vstack([x[0].exp(), x[1].exp(), x[2]]).view(z_dim)
-    else:
-        return torch.vstack([x[:,0].exp(), x[:,1].exp(), x[:,2]]).T
-    
-def h_inverse(x):
-    if x.dim() == 1:
-        return torch.vstack([x[0].log(), x[1].log(), x[2]]).view(z_dim)
-    else:
-        return torch.vstack([x[:,0].log(), x[:,1].log(), x[:,2]]).T
+h = lambda x: x.exp()
+h_inverse = lambda x: x.log()
 #########################################################
 # Initialization LSTM Encoder
 #########################################################
-h_dim   = 25                                    # Hidden dimension of the LSTM
-sigma0  = torch.tensor([1e-2, 5e-3, 0.5])       # Initial standard deviation of the posterior distribution      
-mu0     = torch.tensor([1, 0.5, 15])            # Initial mean of the posterior distribution
+h_dim   = 25                                     # Hidden dimension of the LSTM
+sigma0  = torch.tensor([1e-2, 5e-3, 1e-1]).log() # Initial standard deviation of the posterior distribution      
+mu0     = torch.tensor([1, 0.5, 15])             # Initial mean of the posterior distribution
 Encoder = LSTM_Encoder(x_dim, h_dim, z_dim, nbatch, n_cov, mu0, sigma0, h_inverse)
 #Encoder = torch.compile(Encoder)
 #########################################################
@@ -163,7 +153,7 @@ for iter in range(1,iters + 1):
     #########################################################
     # Save Iteration results
     #########################################################
-    z_pop_iter[iter-1] = torch.hstack((h(z_pop), z_pop[z_dim:]))
+    z_pop_iter[iter-1] = torch.hstack((h(z_pop[:z_dim]), z_pop[z_dim:]))
     omega_pop_iter[iter-1] = omega_pop.sqrt()
     a_iter[iter-1] = a
     Elbo_iter[iter-1] = ELBO.mean()
@@ -197,4 +187,8 @@ printOutput_theo(z_pop, omega_pop, a, b, z_dim, nbatch, lengths.sum(), h, names_
 plotConvergence_pop_theo(Elbo_iter, a_iter, z_pop_iter, omega_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in)
 plotConvergence_covariate_theo(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in)
 
+torch.save(z_pop_iter, 'cpt_paper/theo/Plots/z_pop_iter.pt')
+torch.save(omega_pop_iter, 'cpt_paper/theo/Plots/omega_pop_iter.pt')
+torch.save(a_iter, 'cpt_paper/theo/Plots/a_iter.pt')
+torch.save(Elbo_iter, 'cpt_paper/theo/Plots/Elbo_iter.pt')
 
