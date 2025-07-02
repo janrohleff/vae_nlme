@@ -39,7 +39,7 @@ n_cov  = covariates.shape[1] # Number of covariates
 #########################################################
 # Prior distribution
 #########################################################
-h = lambda x: x.exp()
+h         = lambda x: x.exp()
 h_inverse = lambda x: x.log()
 #########################################################
 # Initialization LSTM Encoder
