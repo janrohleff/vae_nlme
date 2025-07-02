@@ -72,10 +72,8 @@ def initalize_C(nbatch, z_dim, n_cov, covariates, weight_pop):
                 if j == 1:
                     C[i, k, j + z_dim + count] = covariates[i,j]
                 else:    
-                    if k < 2:
-                        C[i, k, j + z_dim + count] = torch.log(covariates[i,j]/weight_pop)
-                    else:
-                        C[i, k, j + z_dim+ count] = covariates[i,j] - weight_pop
+                    C[i, k, j + z_dim + count] = torch.log(covariates[i,j]/weight_pop)
+                  
             count += n_cov
             
     C_regression = torch.zeros(z_dim, nbatch, 1 + n_cov)
@@ -86,10 +84,7 @@ def initalize_C(nbatch, z_dim, n_cov, covariates, weight_pop):
                 if j == 1:
                     C_regression[k,i,j+1] = covariates[i,j]
                 else:
-                    if k < 2:
-                        C_regression[k,i,j+1] = torch.log(covariates[i,j]/weight_pop)
-                    else:
-                        C_regression[k,i,j+1] = covariates[i,j] - weight_pop
+                    C_regression[k,i,j+1] = torch.log(covariates[i,j]/weight_pop)
 
     return C, C_regression
 
