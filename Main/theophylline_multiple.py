@@ -56,10 +56,10 @@ Decoder = lambda z_normal, time, h: Decoder_theophylline_multiple(z_normal, time
 #########################################################
 # Full Covariate Model
 #########################################################
-C, C_regression = initalize_C(nbatch, z_dim, n_cov, covariates, weight_pop)
-names_co = ['beta_ka_weight', 'beta_ka_sex', 'beta_ke_weight', 'beta_ke_sex', 'beta_V_weight', 'beta_V_sex']
+C, C_regression   = initalize_C(nbatch, z_dim, n_cov, covariates, weight_pop)
+names_co          = ['beta_ka_weight', 'beta_ka_sex', 'beta_ke_weight', 'beta_ke_sex', 'beta_V_weight', 'beta_V_sex']
 penalized_indices = np.arange(1,n_cov+ 1)   
-M = C.shape[2] - z_dim   
+M                 = C.shape[2] - z_dim   
 #########################################################
 # Iterations Setup
 #########################################################
@@ -70,7 +70,7 @@ iters         = 300                              # Overall number of iterations
 L_iter        = 5                                # Number of gradient steps per iteration
 burn_in_iter  = L_iter * iters_burn_in           # Overall burn-in gradient steps
 alpha_KL      = torch.linspace(0.01, 1, kl_iter) # KL annealing factor
-smoothing = False
+smoothing     = False
 #########################################################
 # Initialize population parameters updates
 #########################################################
@@ -87,10 +87,10 @@ optimizer.param_groups[0]['lr'] = 2e-3 # Learning rate
 #########################################################
 # Initialize tensors to store results
 #########################################################
-z_pop_iter = torch.zeros(iters, z_dim + M)
+z_pop_iter     = torch.zeros(iters, z_dim + M)
 omega_pop_iter = torch.zeros(iters, z_dim)
-a_iter = torch.zeros(iters)
-Elbo_iter = torch.zeros(iters)
+a_iter         = torch.zeros(iters)
+Elbo_iter      = torch.zeros(iters)
 #########################################################
 # Training
 #########################################################
@@ -137,11 +137,10 @@ for iter in range(1,iters + 1):
         # Store ELBO
         ELBO[l] = p_x_z + DKL 
         
-
         elbo.backward()
         optimizer.step()
         optimizer.zero_grad()
- 
+        
     #########################################################
     # Print
     #########################################################
@@ -153,12 +152,10 @@ for iter in range(1,iters + 1):
     #########################################################
     # Save Iteration results
     #########################################################
-    z_pop_iter[iter-1] = torch.hstack((h(z_pop[:z_dim]), z_pop[z_dim:]))
+    z_pop_iter[iter-1]     = torch.hstack((h(z_pop[:z_dim]), z_pop[z_dim:]))
     omega_pop_iter[iter-1] = omega_pop.sqrt()
-    a_iter[iter-1] = a
-    Elbo_iter[iter-1] = ELBO.mean()
-    
-
+    a_iter[iter-1]         = a
+    Elbo_iter[iter-1]      = ELBO.mean()   
 #########################################################
 # Compute log likelihood
 #########################################################
@@ -173,18 +170,13 @@ for i in range(nbatch):
 LL_lin   = LogLikelihood_linearization(z_pop, omega_pop, [a,b], data, phi_opt, C, h, data[:,:,0], lengths, Decoder)
 LL_is, _ = LogLikelihood_sample(1000, z_pop, omega_pop, [a,b], data, mu, L, C, h, data[:,:,0], lengths, Decoder)
 print('#############################################')
-
-
 #########################################################
 # Output results
 #########################################################
-z_pop_iter = torch.vstack((torch.hstack((z_pop_iter_bi ,torch.zeros(iters_burn_in,M))), z_pop_iter))
+z_pop_iter     = torch.vstack((torch.hstack((z_pop_iter_bi ,torch.zeros(iters_burn_in,M))), z_pop_iter))
 omega_pop_iter = torch.vstack((omega_pop_iter_bi, omega_pop_iter))
-a_iter = torch.hstack((a_iter_bi, a_iter))
-
+a_iter         = torch.hstack((a_iter_bi, a_iter))
 
 printOutput_theo(z_pop, omega_pop, a, b, z_dim, nbatch, lengths.sum(), h, names_co, LL_lin_mu, LL_is)
 plotConvergence_pop_theo_multiple(Elbo_iter, a_iter, z_pop_iter, omega_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in)
 plotConvergence_covariate_theo_multiple(z_pop_iter, iters, kl_iter, gamma_iter, iters_burn_in)
-
-
