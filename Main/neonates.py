@@ -55,14 +55,14 @@ Encoder = LSTM_Encoder(x_dim, h_dim, z_dim, nbatch, n_cov, mu0, sigma0, h_invers
 # Initialization Decoder
 #########################################################
 def f(t, y , PK_params): 
-    kin = PK_params[:,1]
-    TL = PK_params[:,2]
+    kin     = PK_params[:,1]
+    TL      = PK_params[:,2]
     koutmax = PK_params[:,3]
-    T50 = PK_params[:,4]
-    kprod = kin * torch.sigmoid(2*(t - TL))
-    kelim = koutmax * (1 - t/(T50 + t))
+    T50     = PK_params[:,4]
+    kprod   = kin * torch.sigmoid(2*(t - TL))
+    kelim   = koutmax * (1 - t/(T50 + t))
     
-    ddt_W = kprod - kelim*y.squeeze(-1)
+    ddt_W   = kprod - kelim*y.squeeze(-1)
     
     return ddt_W.unsqueeze(-1)
 
@@ -98,7 +98,7 @@ iters         = 300                              # Overall number of iterations
 L_iter        = 10                               # Number of gradient steps per iteration
 burn_in_iter  = L_iter * iters_burn_in           # Overall burn-in gradient steps
 alpha_KL      = torch.linspace(0.01, 1, kl_iter) # KL annealing factor
-smoothing = False
+smoothing     = False
 #########################################################
 # Initialize population parameters updates
 #########################################################
@@ -115,10 +115,10 @@ optimizer.param_groups[0]['lr'] = 5e-3 # Learning rate
 #########################################################
 # Initialize tensors to store results
 #########################################################
-z_pop_iter = torch.zeros(iters, z_dim + M)
+z_pop_iter     = torch.zeros(iters, z_dim + M)
 omega_pop_iter = torch.zeros(iters, z_dim)
-a_iter = torch.zeros(iters)
-Elbo_iter = torch.zeros(iters)
+a_iter         = torch.zeros(iters)
+Elbo_iter      = torch.zeros(iters)
 #########################################################
 # Training
 #########################################################
@@ -180,10 +180,10 @@ for iter in range(1,iters + 1):
     #########################################################
     # Save Iteration results
     #########################################################
-    z_pop_iter[iter-1] = torch.hstack((h(z_pop[:z_dim]), z_pop[z_dim:]))
+    z_pop_iter[iter-1]     = torch.hstack((h(z_pop[:z_dim]), z_pop[z_dim:]))
     omega_pop_iter[iter-1] = omega_pop.sqrt()
-    a_iter[iter-1] = a
-    Elbo_iter[iter-1] = ELBO.mean()
+    a_iter[iter-1]         = a
+    Elbo_iter[iter-1]      = ELBO.mean()
     
 
 #########################################################
