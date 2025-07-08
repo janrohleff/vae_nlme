@@ -4,7 +4,7 @@ This repository contains the Python code used to perform the numerical simulatio
 
 **Redefining Parameter Estimation and Covariate Selection via Variational Autoencoders: One run is all you need**  
 
-**Authors:**  Jan Rohleff, Dominic Bräm, Freya Bachmann, Uri Nahum, Britta Steffens, 
+**Authors:**  **Jan Rohleff**, Freya Bachmann, Uri Nahum, Dominic Bräm, Britta Steffens, 
 Marc Pfister, Gilbert Koch, Johannes Schropp.
 
 *Journal: Name, Year*  
