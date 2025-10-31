@@ -7,8 +7,8 @@ This repository contains the Python code used to perform the numerical simulatio
 **Authors:**  **Jan Rohleff**, Freya Bachmann, Uri Nahum, Dominic Bräm, Britta Steffens, 
 Marc Pfister, Gilbert Koch, Johannes Schropp.
 
-*Journal: CPT: Pharmacometrics & Systems Pharmacology, 2025*
-*DOI: https://doi.org/10.1002/psp4.70129*
+**Journal:** CPT: Pharmacometrics & Systems Pharmacology, 2025
+**DOI:** https://doi.org/10.1002/psp4.70129
 
 The entire code was written by Jan Rohleff.
 
