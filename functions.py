@@ -24,7 +24,7 @@ def kldiv_normal_normal(mean1:torch.Tensor, var1:torch.Tensor, mean2:torch.Tenso
 def p_x_z_compute(data, x_mean, res, lengths):
     a = res[0]
     b = res[1]
-    sigma = (a + b * x_mean).detach() 
+    sigma = a + b * x_mean
     mask = torch.arange(data.shape[1]).unsqueeze(0) < lengths.unsqueeze(1)
     data_masked = data[mask]
     x_mean_masked = x_mean[mask]
