@@ -62,7 +62,7 @@ def q_z_x_compute_batch(eps, sigma):
 def p_x_z_compute_lengths_batch(data, x_mean, res, lengths):
     a = res[0]
     b = res[1]
-    sigma = a + b * x_mean  # Shape: [nbatch, nfeatures]
+    sigma = (a + b * x_mean).detach()
     p_x_z = torch.zeros(data.shape[0])
     for i in range(data.shape[0]):
         err = (data[i,:lengths[i]] - x_mean[i,:lengths[i]]) / sigma[i,:lengths[i]]
